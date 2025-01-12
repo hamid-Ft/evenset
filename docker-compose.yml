@@ -9,12 +9,12 @@ services:
     working_dir: /home/node/app/
     command: sh -c "pnpm install && pnpm run dev"
     depends_on:
-      - db
+      - db-evenset
     env_file:
       - .env
 
-  db:
-    container_name: db
+  db-evenset:
+    container_name: db-evenset
     image: postgres
     environment:
       - POSTGRES_USER=${DB_USER}
@@ -25,13 +25,13 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
-  adminer:
+  adminer-evenset:
     image: adminer:latest
-    container_name: adminer
+    container_name: adminer-evenset
     ports:
       - '8080:8080'
     depends_on:
-      - db
+      - db-evenset
 
 volumes:
   data:
